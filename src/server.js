@@ -64,6 +64,7 @@ import pino from 'pino-http';
 import moviesRouter from './routers/movies-router.js';
 import { notFoundHandler } from './middleware/notFoundHandler.js';
 import { errorHandler } from './middleware/errorHandler.js';
+import authRouter from './routers/auth-router.js';
 
 const startServer = () => {
   const app = express();
@@ -75,7 +76,7 @@ const startServer = () => {
   app.use(cors());
   app.use(express.json()); //важно для вівода информации в консоль.Можно писать разные форматы
   app.use(logger);
-
+  app.use('/api/auth', authRouter);
   app.use('/api/movies', moviesRouter);
 
   app.use(notFoundHandler);
