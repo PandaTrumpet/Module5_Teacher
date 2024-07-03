@@ -1,6 +1,6 @@
 import { Schema, model } from 'mongoose';
 import { mongooseSaveError, setUpdatesSettings } from './hooks.js';
-import { required } from 'joi';
+
 import { emailRegexp } from '../../constants/users-constans.js';
 
 const userSchema = new Schema(
