@@ -28,4 +28,10 @@ export const signinController = async (req, res) => {
   if (!passwordCompare) {
     throw createHttpError(401, 'Password invalid');
   }
+  const accessToken = '122.3q34.234234';
+  const refreshToken = '1222.2222.43';
+  res.json({
+    accessToken,
+    refreshToken,
+  });
 };

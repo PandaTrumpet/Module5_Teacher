@@ -5,7 +5,10 @@ import {
   userSigninSchema,
   userSignupSchema,
 } from '../validation/userSchema.js';
-import { signupController } from '../controllers/auth-controllers.js';
+import {
+  signinController,
+  signupController,
+} from '../controllers/auth-controllers.js';
 
 const authRouter = Router();
 authRouter.post(
@@ -13,5 +16,9 @@ authRouter.post(
   validateBody(userSignupSchema),
   ctrlWrapper(signupController),
 );
-authRouter.post('/signin', validateBody(userSigninSchema));
+authRouter.post(
+  '/signin',
+  validateBody(userSigninSchema),
+  ctrlWrapper(signinController),
+);
 export default authRouter;
