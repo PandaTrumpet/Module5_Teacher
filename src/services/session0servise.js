@@ -4,7 +4,8 @@ import {
   ACCESS_TOKEN_LIFETIME,
   REFRESH_TOKEN_LIFETIME,
 } from '../constants/index.js';
-export const createSession = (userId) => {
+export const createSession = async (userId) => {
+  await SessionCollection.deleteOne({ userId });
   const accessToken = randomBytes(30).toString('base64');
   const refreshToken = randomBytes(30).toString('base64');
   const accessTokenValidUntil = new Date(Date.now() + ACCESS_TOKEN_LIFETIME);

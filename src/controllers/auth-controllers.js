@@ -29,6 +29,19 @@ export const signinController = async (req, res) => {
   if (!passwordCompare) {
     throw createHttpError(401, 'Password invalid');
   }
-  const session = await createSession(user._id);
-  res.json(session);
+  const { refreshToken, accessToken, _id, refreshTokenValidUntil } =
+    await createSession(user._id);
+  res.cookie('refreshToken', refreshToken, {
+    httpOnly: true,
+    expires: refreshTokenValidUntil,
+  });
+  res.cookie('sessionId', _id, {
+    httpOnly: true,
+    expires: refreshTokenValidUntil,
+  });
+  res.json({
+    satus: 200,
+    message: 'Successful',
+    data: { accessToken: accessToken },
+  });
 };
