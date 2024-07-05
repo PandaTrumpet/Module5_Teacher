@@ -30,6 +30,11 @@ const movieSchema = new Schema(
       type: Boolean,
       default: false,
     },
+    userId: {
+      type: Schema.Types.ObjectId,
+      ref: 'user',
+      required: true,
+    },
   },
   {
     versionKey: false,

@@ -3,7 +3,7 @@ import { findSession } from '../services/session0servise.js';
 import { findUser } from '../services/auth-services.js';
 export const authenticate = async (req, res, next) => {
   const authHeader = req.get('Authorization');
-  console.log(authHeader);
+  //   console.log(authHeader);
 
   if (!authHeader) {
     return next(createHttpError(401, 'Authorization header missing')); //если вообще нету заголовка
@@ -29,6 +29,8 @@ export const authenticate = async (req, res, next) => {
   if (!user) {
     return next(createHttpError(401, 'User not found'));
   }
+  req.user = user;
+  //   console.log(user.name);
   next();
 };
 

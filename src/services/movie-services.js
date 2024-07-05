@@ -9,6 +9,9 @@ export const getMovies = async ({
 }) => {
   const skip = (page - 1) * perPage;
   const databaseQuery = Movie.find();
+  if (filter.userId) {
+    databaseQuery.where('userId').equals(filter.userId);
+  }
   if (filter.type) {
     databaseQuery.where('type').equals(filter.type);
   }
@@ -43,7 +46,7 @@ export const getMovies = async ({
     hasPrevPage,
   };
 };
-export const getMovieById = (id) => Movie.findById(id); //throw new Error()
+export const getMovie = (filter) => Movie.findOne(filter); //throw new Error()
 
 export const adddMOvie = (data) => Movie.create(data);
 // export const upsertMovie = (filter, data, options = {}) =>
