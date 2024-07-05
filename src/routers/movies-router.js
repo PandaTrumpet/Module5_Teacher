@@ -12,11 +12,13 @@ import {
 import isValidId from '../middleware/isValidid.js';
 import { ctrlWrapper } from '../utils/ctrlWrapper.js';
 import validateBody from '../utils/validateBody.js';
+import { authenticate } from '../middleware/authenticate.js';
 import {
   movieAddSchema,
   movieUpdateSchema,
 } from '../validation/movie-schemas.js';
 const moviesRouter = express.Router();
+moviesRouter.use(authenticate);
 moviesRouter.get('/', ctrlWrapper(getAllMoviesController)),
   moviesRouter.get('/:id', isValidId, ctrlWrapper(getMovieByIdController));
 moviesRouter.post(
